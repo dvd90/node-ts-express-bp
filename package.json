@@ -1,20 +1,26 @@
 {
-  "name": "node-ts-express-boilerplate",
+  "name": "express-ts-boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "app/index.js",
   "scripts": {
     "test": "jest --runInBand",
     "test:watch": "npm run test -- --watch",
-    "start": "npm run build && node --max-old-space-size=4096 build/server.js",
+    "start": "npm run build && npm run run",
+    "run": "node --max-old-space-size=4096 build/server.js",
     "build": "npm run tsc",
     "tsc": "tsc",
     "dev": "DEBUG=http,mail,express:* nodemon src/server.ts",
     "lint": "eslint . --ext .ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/myinterviewIL/express-ts-boilerplate.git"
+  },
+  "author": "dvd90",
   "license": "ISC",
+  "homepage": "https://bitbucket.org/myinterviewIL/express-ts-boilerplate#readme",
   "jest": {
     "moduleFileExtensions": [
       "ts",
@@ -39,19 +45,19 @@
     }
   },
   "dependencies": {
-    "@sentry/node": "^6.5.1",
+    "@sentry/node": "^6.7.1",
     "@types/morgan": "^1.9.2",
     "cors": "^2.8.5",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
-    "express-validator": "^6.11.1",
+    "express-validator": "^6.12.0",
     "helmet": "^4.4.1",
     "jwks-rsa": "^2.0.3",
     "moment": "^2.29.1",
-    "mongoose": "^5.12.13",
+    "mongoose": "^5.12.14",
     "morgan": "^1.10.0",
-    "typescript": "^4.3.2",
+    "typescript": "^4.3.4",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -62,17 +68,17 @@
     "@types/qs": "^6.9.6",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
-    "jest": "^26.4.2",
+    "jest": "^27.2.5",
     "morgan-body": "^2.6.5",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
-    "ts-jest": "^26.4.1",
+    "ts-jest": "^27.0.7",
     "ts-node": "^9.1.1",
     "tslint": "^6.1.3"
   }

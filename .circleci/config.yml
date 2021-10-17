@@ -1,0 +1,24 @@
+version: '2.1'
+orbs:
+  aws-ecr: circleci/aws-ecr@6.15
+  aws-ecs: circleci/aws-ecs@2.0.0
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          account-url: AWS_ECR_ACCOUNT_URL
+          extra-build-args: '--build-arg NODE_ENV=<<pipeline.git.branch>> --build-arg NPM_TOKEN=${NPM_TOKEN}'
+          region: AWS_REGION
+          repo: '${AWS_RESOURCE_NAME_PREFIX}-<<pipeline.git.branch>>'
+          tag: 'latest'
+          filters:
+            branches:
+              only:
+                - staging
+                - master
+      - aws-ecs/deploy-service-update:
+          cluster-name: '${ECS_CLUSTER_NAME}-<<pipeline.git.branch>>'
+          family: '${ECS_TASK_DEFINITION}-<<pipeline.git.branch>>'
+          service-name: '${ECS_SERVICE_NAME}-<<pipeline.git.branch>>'
+          requires:
+            - aws-ecr/build-and-push-image
