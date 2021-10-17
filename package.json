@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/myinterviewIL/express-ts-boilerplate.git"
   },
-  "author": "dvd90",
+  "author": "",
   "license": "ISC",
   "homepage": "https://bitbucket.org/myinterviewIL/express-ts-boilerplate#readme",
   "jest": {
