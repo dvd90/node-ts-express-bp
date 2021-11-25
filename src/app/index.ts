@@ -45,6 +45,6 @@ initRoutes(app);
 
 // Initialize Error Handlers
 initErrorHandler(app);
-initSentry(app, true);
+initSentry(app, false);
 
 export default app;

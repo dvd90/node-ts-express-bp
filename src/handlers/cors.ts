@@ -12,7 +12,6 @@ export const initCORS = (app: express.Application): void => {
           origin === 'null' ||
           [
             'localhost',
-            'myinterview.com',
             'file://',
             'chrome-extension://' // To test from Postman App
           ].some((value) => origin.indexOf(value) >= 0)
