@@ -1,6 +1,8 @@
-import app from './app';
 import { logSuccess } from './utils';
+import APP from './app';
 
-app.listen(app.get('port'), () =>
-  logSuccess(`Server started on port ${app.get('port')} 🚀`)
-);
+APP().then((app) => {
+  app.listen(app.get('port'), () =>
+    logSuccess(`Server started on port ${app.get('port')} 🚀`)
+  );
+});

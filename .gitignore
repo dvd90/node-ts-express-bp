@@ -53,3 +53,4 @@ build/
 logs/
 
 .env
+coverage

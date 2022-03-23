@@ -8,11 +8,7 @@ export interface IErrorCode {
   statusReason: string;
 }
 
-export interface IErrorCodeObj {
-  [errorString: string]: IErrorCode;
-}
-
-export const ERROR_CODES: IErrorCodeObj = {
+const ERROR_CODES_TO_TYPE = {
   OK: {
     id: 0,
     statusCode: STATUS_CODES.OK,
@@ -117,3 +113,9 @@ export const ERROR_CODES: IErrorCodeObj = {
     statusReason: 'Server Error'
   }
 };
+
+export type IErrorCodeObj = {
+  [errorCodes in keyof typeof ERROR_CODES_TO_TYPE]: IErrorCode;
+};
+
+export const ERROR_CODES = ERROR_CODES_TO_TYPE as IErrorCodeObj;
