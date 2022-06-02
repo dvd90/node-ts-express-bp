@@ -3,11 +3,8 @@ import { dbUri, logDanger, logPrimary } from '../utils';
 
 export async function initDB(): Promise<mongoose.Connection | undefined> {
   try {
-    console.log(dbUri);
-
-    if (!dbUri) {
+    if (!dbUri){
       logDanger('DB not connected...');
-      return;
     }
 
     await mongoose.connect(dbUri, {

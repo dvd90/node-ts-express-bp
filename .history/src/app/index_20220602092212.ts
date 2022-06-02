@@ -27,7 +27,7 @@ export default async function (testFlag?: boolean): Promise<Express> {
 
   app.use(helmet());
 
-  app.set('port', PORT || 3000);
+  app.set('port', PORT);
 
   if (process.env.NODE_ENV !== 'production') {
     morganBody(app);

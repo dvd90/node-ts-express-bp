@@ -1,15 +1,8 @@
 import mongoose from 'mongoose';
 import { dbUri, logDanger, logPrimary } from '../utils';
 
-export async function initDB(): Promise<mongoose.Connection | undefined> {
+export async function initDB(): Promise<mongoose.Connection> {
   try {
-    console.log(dbUri);
-
-    if (!dbUri) {
-      logDanger('DB not connected...');
-      return;
-    }
-
     await mongoose.connect(dbUri, {
       useNewUrlParser: true,
       useCreateIndex: true,

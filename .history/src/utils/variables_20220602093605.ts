@@ -19,7 +19,7 @@ AUTH0_JWT_AUDIENCE=auth0JWTAudience
 
 export const environment = process.env.NODE_ENV;
 
-export const dbUri = process.env.MONGODB_URI;
+export const dbUri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PW}@${process.env.MONGODB_URI}/${process.env.MONGODB_DB}?retryWrites=true&w=majority`;
 
 export const PORT = process.env.PORT || 8000;
 
