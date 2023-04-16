@@ -1,12 +1,7 @@
 import express from 'express';
 import jwtExpress, { RequestHandler } from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
-import {
-  auth0Vars,
-  ERROR_CODES,
-  errResHandler,
-  ICustomRequest
-} from '../utils';
+import { auth0Vars, ICustomRequest } from '../utils';
 
 // Auth with Auth0
 const authJWT: RequestHandler = jwtExpress({
@@ -29,15 +24,9 @@ export const authMiddleware = [
     res: express.Response,
     next: express.NextFunction
   ): unknown {
+    const { resHandler } = req;
     if (!req.user) {
-      return errResHandler(
-        res,
-        req,
-        ERROR_CODES.WRONG_TOKEN,
-        'err in authMiddleware',
-        'src/middleware/authentication',
-        req.callId
-      );
+      return resHandler.wrongToken();
     }
 
     next();

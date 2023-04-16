@@ -4,7 +4,12 @@ dotenv.config();
 import express, { Express } from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
-import { initCORS, initErrorHandler, initSentry } from '../handlers';
+import {
+  ResponseHandler,
+  initCORS,
+  initErrorHandler,
+  initSentry
+} from '../handlers';
 import initRoutes from '../routes';
 import { PORT } from '../utils';
 import morganBody from 'morgan-body';
@@ -24,9 +29,7 @@ initDB().then((connection: mongoose.Connection) => {
 export default async function (testFlag?: boolean): Promise<Express> {
   const app = express();
   app.use(express.json());
-
   app.use(helmet());
-
   app.set('port', PORT || 3000);
 
   if (process.env.NODE_ENV !== 'production') {
@@ -34,6 +37,8 @@ export default async function (testFlag?: boolean): Promise<Express> {
     app.use(morganMiddleware);
     app.use(logMiddleware);
   }
+
+  app.use(ResponseHandler.responseHandlerMiddleware);
 
   // CORS
   initCORS(app);

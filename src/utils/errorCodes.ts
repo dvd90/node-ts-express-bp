@@ -33,7 +33,7 @@ const ERROR_CODES_TO_TYPE = {
     id: 10000,
     statusCode: STATUS_CODES.UNAUTHORIZED,
     statusReason: 'Unauthorized',
-    message: (key?: string): string =>
+    message: (key?: string | ValidationError[]): string =>
       `Access denied with access key: ${key ?? ''}`
   },
   WRONG_TOKEN: {
@@ -77,40 +77,110 @@ const ERROR_CODES_TO_TYPE = {
     id: 10007,
     statusCode: STATUS_CODES.NOT_FOUND,
     statusReason: 'Not Found',
-    message: (resource: string): string => `${resource} was not found`
+    message: (resource?: string | ValidationError[]): string =>
+      `${resource} was not found`
+  },
+  ALREADY_EXISTS: {
+    id: 10018,
+    statusCode: STATUS_CODES.ALREADY_EXISTS,
+    statusReason: 'Already exists',
+    message: (resource?: string | ValidationError[]): string =>
+      `${resource} already exists`
   },
   VALIDATION: {
     id: 10008,
     statusCode: STATUS_CODES.BAD_REQUEST,
     statusReason: 'Validation',
     message: (
-      resource: string | ValidationError[]
-    ): string | ValidationError[] => resource
+      resource?: string | ValidationError[]
+    ): string | ValidationError[] => resource as string | ValidationError[]
+  },
+  BAD_WEBHOOK_REQUEST: {
+    id: 10009,
+    statusCode: STATUS_CODES.BAD_REQUEST,
+    statusReason: 'missing config',
+    message: (
+      video_id?: string | ValidationError[]
+    ): string | ValidationError[] =>
+      `Video ID: ${
+        video_id as string
+      } is not configured to have webhooks` as string
   },
   UNAUTHORIZED_IP: {
-    id: 10009,
+    id: 10010,
     statusCode: STATUS_CODES.FORBIDDEN,
     statusReason: 'Unauthorized IP',
     message: (): string =>
       'Unauthorized IP, please check the list of allowed IP addresses'
   },
   EXPIRED: {
-    id: 10010,
+    id: 10011,
     statusCode: STATUS_CODES.FORBIDDEN,
     statusReason: 'Expired',
-    message: (message?: string): string => 'Expired ' + message
+    message: (message?: string | ValidationError[]): string =>
+      'Expired ' + message
   },
   MISSING_QUERY_PARAMS: {
-    id: 10011,
+    id: 10012,
     statusCode: STATUS_CODES.BAD_REQUEST,
     statusReason: 'Missing Query Params',
-    message: (resource: string): string =>
+    message: (resource?: string | ValidationError[]): string =>
       `${resource} query params was not found`
+  },
+  PAYMENT_REQUIRED: {
+    id: 10013,
+    statusCode: STATUS_CODES.PAYMENT_REQUIRED,
+    statusReason: 'Payment Required',
+    message: (): string => 'Unauthorized, Payment Required'
+  },
+  UNAUTHORIZED_REFERRER: {
+    id: 10014,
+    statusCode: STATUS_CODES.FORBIDDEN,
+    statusReason: 'Unauthorized Referrer',
+    message: (referrer?: string | ValidationError[]): string =>
+      `Access Denied for referrer : ${referrer}`
+  },
+  UNAUTHORIZED_INTEGRATION: {
+    id: 10015,
+    statusCode: STATUS_CODES.FORBIDDEN,
+    statusReason: 'Unauthorized Integration',
+    message: (integration?: string | ValidationError[]): string =>
+      `Access Denied for integration : ${integration}. Please add the integration on our integration page on myInteview dashboard.`
+  },
+  JOB_NOT_ACTIVE: {
+    id: 10016,
+    statusCode: STATUS_CODES.FORBIDDEN,
+    statusReason: 'Job not Active',
+    message: (): string => 'Job not Active'
+  },
+  SUBSCRIPTION_NOT_ACTIVE: {
+    id: 10017,
+    statusCode: STATUS_CODES.FORBIDDEN,
+    statusReason: 'Subscription not Active',
+    message: (): string => 'Subscription not Active'
+  },
+  UNAUTHORIZED_EMAIL: {
+    id: 10018,
+    statusCode: STATUS_CODES.FORBIDDEN,
+    statusReason: 'Unauthorized Email',
+    message: (): string =>
+      'Unauthorized Email, please check the list of allowed Email addresses'
+  },
+  FORBIDDEN: {
+    id: 10018,
+    statusCode: STATUS_CODES.FORBIDDEN,
+    statusReason: 'Forbidden'
   },
   SERVER_ERROR: {
     id: 50000,
     statusCode: STATUS_CODES.SERVER_ERROR,
     statusReason: 'Server Error'
+  },
+  MISSING_CONFIG: {
+    id: 50001,
+    statusCode: STATUS_CODES.SERVER_ERROR,
+    statusReason:
+      'This server is missing some configuration to preform this request'
   }
 };
 

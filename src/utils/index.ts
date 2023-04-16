@@ -12,6 +12,4 @@ export * from './statusCodes';
 
 export * from './errorCodes';
 
-export * from './apiResponse';
-
 export * from './validation';

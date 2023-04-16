@@ -3,6 +3,7 @@ import { ValidationError } from 'express-validator';
 import request from 'request';
 
 import { STATUS_CODES } from '.';
+import { ResponseHandler } from '../handlers';
 
 export type HTTPMethod =
   | 'all'
@@ -35,7 +36,6 @@ export interface IApiErrorObj {
 }
 
 export interface userAuth0Jwt {
-  ['https://myinterview.com/metadata']: indexedObject;
   iss: string;
   sub: string;
   aud: string | string[];
@@ -60,25 +60,12 @@ export interface ICustomRequest extends express.Request {
   // Add your custom req here...
   callId?: string;
   user?: userAuth0Jwt;
+  resHandler?: ResponseHandler;
 }
 
 export interface indexedObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-}
-
-// AGENDA_JOB
-export interface ISendMailPayload {
-  from: string;
-  to: string;
-  subject: string;
-  template: string;
-  'h:X-Mailgun-Variables': indexedObject | string;
-}
-
-export interface ITwilioSMSPayload {
-  message: string;
-  phoneNumber: string;
 }
 
 export type ExpressRoute = (
@@ -90,14 +77,6 @@ export type ExpressRoute = (
   | express.Response<unknown, Record<string, unknown>>
   | void
   | request.Request;
-
-export interface IS3Config {
-  name: string;
-  prefix: string;
-  region: string;
-  AWSRegion: string;
-  cloudFront: string;
-}
 
 export interface LeanRequest {
   callId: string;

@@ -17,7 +17,6 @@ describe('StatusController', () => {
       const res = await request(app).get('/status');
 
       expect(res.statusCode).toEqual(200);
-      expect(res.body.data).toHaveProperty('message');
     });
   });
 });
