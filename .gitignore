@@ -54,3 +54,4 @@ logs/
 
 .env
 coverage
+.response
